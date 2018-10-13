@@ -1,0 +1,16 @@
+{
+  "name": "message-police-bot",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Police messages on a discord server",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Slak44",
+  "license": "MIT",
+  "dependencies": {
+    "bufferutil": "^3.0.2",
+    "discord.js": "^11.1.0",
+    "erlpack": "github:hammerandchisel/erlpack",
+    "uws": "^8.14.0"
+  }
+}
