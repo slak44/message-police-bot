@@ -4,10 +4,12 @@
 
 const fs = require('fs');
 
+const cd = __dirname;
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const config = require('./config.json');
+const config = require(`${cd}/config.json`);
 
 client.on('ready', () => {
   console.log('Initialized');
@@ -36,4 +38,4 @@ client.on('message', message => {
   });
 });
 
-client.login(fs.readFileSync('bot-token', {encoding: 'utf8'}));
+client.login(fs.readFileSync(`${cd}/bot-token`, {encoding: 'utf8'}));
