@@ -15,7 +15,14 @@ client.on('ready', () => {
   console.log('Initialized');
 });
 
-const shouldPolice = (message, listOfWrongthink) => listOfWrongthink.some(e => message.content.toLowerCase().includes(e));
+function shouldPolice(msg, listOfWrongthink, isRegex, ignoreWhitespace) {
+  const text = (ignoreWhitespace ? msg.content.replace(/\s+/gi, "") : msg.content).toLowerCase();
+  const badStuff = ignoreWhitespace ?
+      listOfWrongthink.map(e => e.replace(/\s+/gi, "").toLowerCase()) :
+      listOfWrongthink.map(e => e.toLowerCase());
+  if (!isRegex) return badStuff.some(e => text.includes(e));
+  else return badStuff.some(regex => text.match(RegExp(regex, "g")) != null);
+}
 
 function runAction(action, message) {
   switch (action.kind) {
@@ -34,7 +41,9 @@ function runAction(action, message) {
 
 client.on('message', message => {
   config.forEach(filter => {
-    if (shouldPolice(message, filter.triggers)) filter.actions.forEach(action => runAction(action, message));
+    if (shouldPolice(message, filter.triggers, filter.isRegex, filter.ignoreWhitespace)) {
+      filter.actions.forEach(action => runAction(action, message));
+    }
   });
 });
 
