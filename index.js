@@ -45,10 +45,12 @@ function runAction(action, message) {
 
 client.on('message', message => {
   config.forEach(filter => {
+    // Skip replying to bots, to avoid any chance of direct or mutual message recursion
+    if (message.author.bot) return;
     if (shouldPolice(message, filter.triggers, filter.isRegex, filter.ignoreWhitespace)) {
       filter.actions.forEach(action => runAction(action, message));
     }
   });
 });
 
-client.login(fs.readFileSync(`${cd}/bot-token`, {encoding: 'utf8'}));
+client.login(fs.readFileSync(`${cd}/bot-token`, {encoding: 'utf8'}).toString());
