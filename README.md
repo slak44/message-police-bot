@@ -22,6 +22,7 @@ A `config.json` file must exist in the script's directory, with the following fo
     "actions": [
       {"kind": "react", "emoji": "1213532653563465"},
       {"kind": "react", "emoji": "6835787878342543"},
+      {"kind": "message", "message": "Hello trigger3&4"},
       {"kind": "reply", "message": "I'm replying to a another trigger"},
       {"kind": "reply", "message": "I'm replying twice to a another trigger"}
     ]
@@ -36,6 +37,7 @@ The root array is an array of objects with the above format.
 Action kinds:
 - `react`: must also have a `emoji` property with an emoji id
 - `reply`: must also have a `message` property with the reply text
+- `message`: like reply, but doesn't mention the person that triggered the action
 - `delete`: no other property required
 
 `ignoreWhitespace`: if true, both the messages and the filters will be stripped of whitespace.  

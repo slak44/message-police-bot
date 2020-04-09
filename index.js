@@ -32,10 +32,14 @@ function runAction(action, message) {
     case 'reply':
       message.reply(action.message);
       break;
+    case 'message':
+      message.channel.send(action.message);
+      break;
     case 'delete':
       message.delete();
       break;
-    default: throw Error(`Bad config, unknown action ${action.kind}`);
+    default:
+      throw Error(`Bad config, unknown action ${action.kind}`);
   }
 }
 
