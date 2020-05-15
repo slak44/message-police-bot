@@ -27,7 +27,7 @@ function shouldPolice(msg, listOfWrongthink, isRegex, ignoreWhitespace) {
 function runAction(action, message) {
   switch (action.kind) {
     case 'react':
-      message.react(message.guild.emojis.get(action.emoji));
+      message.react(action.emoji);
       break;
     case 'reply':
       message.reply(action.message);
